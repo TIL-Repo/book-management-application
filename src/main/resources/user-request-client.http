@@ -1,0 +1,28 @@
+### 회원가입
+
+POST localhost:8080/user
+Content-Type: application/json
+
+{
+  "name" : "하하하",
+  "age" : 27
+}
+
+### 유저 조회
+
+GET localhost:8080/user
+
+### 회원정보 수정
+
+PUT localhost:8080/user
+Content-Type: application/json
+
+{
+  "id" : 1,
+  "name" : "하하하4"
+}
+
+### 유저 삭제
+
+DELETE localhost:8080/user?name=하하하4
+Content-Type: application/json

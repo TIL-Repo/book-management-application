@@ -1,0 +1,28 @@
+### 책 등록
+
+POST localhost:8080/book
+Content-Type: application/json
+
+{
+  "name" : "책"
+}
+
+### 책 대여
+
+POST localhost:8080/book/loan
+Content-Type: application/json
+
+{
+  "userName" : "하하하",
+  "bookName" : "책"
+}
+
+### 책 반납
+
+PUT localhost:8080/book/return
+Content-Type: application/json
+
+{
+  "userName" : "하하하",
+  "bookName" : "책"
+}
