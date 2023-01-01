@@ -2,6 +2,7 @@ package com.group.libraryapp.service.book
 
 import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
+import com.group.libraryapp.domain.book.BookType
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory
 import com.group.libraryapp.domain.user.UserRepository
@@ -35,7 +36,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책 등록 성공")
     fun saveBookTest() {
         // given
-        val request = BookRequest("책A")
+        val request = BookRequest("책A", BookType.COMPUTER)
 
         // when
         bookService.saveBook(request)
@@ -44,13 +45,14 @@ class BookServiceTest @Autowired constructor(
         val books = bookRepository.findAll()
         assertThat(books).hasSize(1)
         assertThat(books[0].name).isEqualTo("책A")
+        assertThat(books[0].type).isEqualTo(BookType.COMPUTER)
     }
 
     @Test
     @DisplayName("책 대출 성공")
     fun loanBookTest() {
         // given
-        bookRepository.save(Book("책A"))
+        bookRepository.save(Book.fixture("책A"))
         val user = userRepository.save(User("홍길동", null))
         val request = BookLoanRequest("홍길동", "책A")
 
@@ -69,7 +71,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책 대출 실패")
     fun loanBookFailTest() {
         // given
-        bookRepository.save(Book("책A"))
+        bookRepository.save(Book.fixture("책A"))
         val user = userRepository.save(User("홍길동", null))
         userLoanHistoryRepository.save(UserLoanHistory(user, "책A", false))
         val request = BookLoanRequest("홍길동", "책A")
@@ -86,7 +88,7 @@ class BookServiceTest @Autowired constructor(
     @DisplayName("책 반납 성공")
     fun returnBookTest() {
         // given
-        bookRepository.save(Book("책A"))
+        bookRepository.save(Book.fixture("책A"))
         val user = userRepository.save(User("홍길동", null))
         userLoanHistoryRepository.save(UserLoanHistory(user, "책A", false))
         val request = BookReturnRequest("홍길동", "책A")

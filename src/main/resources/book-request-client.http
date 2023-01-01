@@ -4,7 +4,8 @@ POST localhost:8080/book
 Content-Type: application/json
 
 {
-  "name" : "책"
+  "name" : "책",
+  "type" : "COMPUTER"
 }
 
 ### 책 대여
