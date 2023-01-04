@@ -27,3 +27,11 @@ Content-Type: application/json
   "userName" : "하하하",
   "bookName" : "책"
 }
+
+### 현재 대여 중인 책의 권수 보여주기
+
+GET localhost:8080/book/loan
+
+### 분야별로 등록된 책의 권수 보여주기
+
+GET localhost:8080/book/stat
